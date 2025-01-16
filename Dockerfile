@@ -14,6 +14,7 @@ RUN apt update && \
         cron \
         xvfb \
         gosu \
+        fonts-noto-color-emoji \
         && apt clean && \
     pip install --no-cache-dir requests selenium flask
 
