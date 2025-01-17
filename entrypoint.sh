@@ -54,5 +54,10 @@ ACCOUNT=$(ls /app/napcat/config/ | grep -oE '[1-9][0-9]{4,12}' | head -n 1)
 gosu napcat /opt/QQ/qq --no-sandbox -q $ACCOUNT
 
 # 启动 server.py 服务
-echo "Starting server.py to handle snapshoot requests..."
-python /app/server.py
+if [ -f /app/server.py ]; then
+    echo "Starting server.py to handle snapshoot requests..."
+    python /app/server.py > /var/log/server.log 2>&1 &
+else
+    echo "Error: /app/server.py not found!"
+    exit 1
+fi
